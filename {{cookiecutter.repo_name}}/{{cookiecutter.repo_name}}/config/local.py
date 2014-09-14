@@ -9,6 +9,9 @@ Local Configurations
 from configurations import values
 from .common import Common
 
+from psycopg2 import connect
+import getpass
+
 
 class Local(Common):
 
@@ -42,3 +45,7 @@ class Local(Common):
     # end django-debug-toolbar
 
     # Your local stuff: Below this line define 3rd party libary settings
+
+    # Setup local postgresdb
+    user = getpass.getuser()
+    con = connect(dbname='{{ cookiecutter.repo_name }}', user=user, host='localhost')
